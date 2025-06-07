@@ -788,7 +788,10 @@ footer {
     .hero-buttons {
         flex-direction: column;
     }
-    
+    .h2 {
+        margin-top: 0px;
+        margin: 0px;
+    }
     .btn-outline {
         margin-left: 0;
         margin-top: 15px;
@@ -805,9 +808,14 @@ footer {
 @media(max-width:1023px) {
     header {
      padding: 12px 20px;
+     margin-top: 0px;
  
     }
-    container {
+    .h2 {
+        margin-top: 0px;
+        margin: 0px;
+    }
+    .container {
         padding: 12px 20px;
         margin-top: auto;
     }
@@ -840,12 +848,16 @@ footer {
  body {
  font-size: 12px;
  }
- container {
+ .container {
     padding: 12px 20px;
     margin-top: auto;
     
 }
  
+.h2 {
+    margin-top: 0px;
+    margin: 0px;
+}
  .main-content h2 {
      font-size: 0.8em;
  }
@@ -861,11 +873,14 @@ footer {
          font-size: 10px;
      }
  
-     container {
+    .container {
         padding: 12px 20px;
         margin-top: auto;
     }
- 
+    .h2 {
+        margin-top: 0px;
+        margin: 0px;
+    }
  
      
  }
