@@ -126,12 +126,20 @@ document.addEventListener('DOMContentLoaded', function() {
             this.reset();
         });
     }
-    const nodemailer = require('nodemailer');
+    const nodemailer = require ('nodemailer');
     const transporter = nodemailer.createTransport( {
         service: 'Gmail',
         auth: {user: 'tjd44211@gmail.com', pass: 'app-passowrd'}
 
+
     });
+    const conatct = () => {
+        const [dormData, setFormData] = useState ({
+            name: '',
+                email:'',
+            subject:'',
+            message:''
+        });
     transporter.sendMail({ to:  'tjd44211@gmail.com' , text: 'New Message?'})
     // Set current year in footer
     const yearElement = document.querySelector('.footer-bottom p');
@@ -139,4 +147,5 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentYear = new Date().getFullYear();
         yearElement.innerHTML = yearElement.innerHTML.replace('2023', currentYear);
     }
+}
 });
