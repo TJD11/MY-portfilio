@@ -6,6 +6,7 @@
     <title>Tareq | Web Developer & Designer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="" href=".nev">
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -14,6 +15,7 @@
             <div class="logo">Tareq</div>
             
             <nav class="nav-links">
+               
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
@@ -362,15 +364,19 @@
                 
                 <form class="contact-form">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                        <label for="username">Your Name</label>
+                        <input type="text" placeholder="Your Name" autocomplete="username" required>
                     </div>
                     <div class="form-group">
+                        <label for="email">Email</label>
                         <input type="email" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
+                        <label for="Subject">Subject</label>
                         <input type="text" placeholder="Subject">
                     </div>
                     <div class="form-group">
+                        <label for="message">Your Message</label>
                         <textarea placeholder="Your Message" required></textarea>
                     </div>
                     <button type="submit" class="btn">Send Message</button>
@@ -411,5 +417,6 @@
     </footer>
 
     <script src="script.js"></script>
+    
 </body>
 </html>

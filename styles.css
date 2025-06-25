@@ -11,7 +11,13 @@
     --black: #000;
     --transition: all 0.3s ease;
 }
-
+title {
+    :root {
+    --bg-color:#ffffffff;
+    --text-color:#333333;
+    --nav-bg:#343
+    }
+}
 * {
     margin: 0;
     padding: 0;
