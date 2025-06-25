@@ -1,4 +1,3 @@
-const { useState } = require("react");
 
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile Menu Toggle
@@ -116,17 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = this.querySelector('input[type="email"]').value;
             const subject = this.querySelector('input[type="text"]:nth-of-type(2)').value;
             const message = this.querySelector('textarea').value;
-
-
-
-            const contact =() => {
-            cost [FormData, setFormData] = useState ({
-                name: '',
-                email: '',
-                subject: '',
-                message: ''
-            });
-            }
             
             // Here you would typically send the form data to a server
             console.log('Form submitted:', { name, email, subject, message });
@@ -138,5 +126,17 @@ document.addEventListener('DOMContentLoaded', function() {
             this.reset();
         });
     }
+    const nodemailer = require('nodemailer');
+    const transporter = nodemailer.createTransport( {
+        service: 'Gmail',
+        auth: {user: 'tjd44211@gmail.com', pass: 'app-passowrd'}
 
+    });
+    transporter.sendMail({ to:  'tjd44211@gmail.com' , text: 'New Message?'})
+    // Set current year in footer
+    const yearElement = document.querySelector('.footer-bottom p');
+    if (yearElement) {
+        const currentYear = new Date().getFullYear();
+        yearElement.innerHTML = yearElement.innerHTML.replace('2023', currentYear);
+    }
 });
