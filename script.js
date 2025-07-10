@@ -125,22 +125,126 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reset form
             this.reset();
         });
-    }
-    const nodemailer = require ('nodemailer');
-    const transporter = nodemailer.createTransport( {
-        service: 'Gmail',
-        auth: {user: 'tjd44211@gmail.com', pass: 'app-passowrd'}
+    }// server.js
+require('dotenv').config();
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
 
+const app = express();
+app.use(cors());
+app.use(express.json());
 
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
+
+app.post('/send-email', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+    
+    await transporter.sendMail({
+      from: `"${name}" <${email}>`,
+      to: 'tjd44211@gmail.com',
+      subject: subject,
+      text: message,
+      html: `<p>${message}</p>`
     });
-    const conatct = () => {
-        const [dormData, setFormData] = useState ({
-            name: '',
-                email:'',
-            subject:'',
-            message:''
-        });
-    transporter.sendMail({ to:  'tjd44211@gmail.com' , text: 'New Message?'})
+
+    res.status(200).json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'فشل إرسال الرسالة' });
+  }
+});
+    // ContactForm.jsx
+import React, { useState } from 'react';
+
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch('http://localhost:5000/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert('تم إرسال الرسالة بنجاح!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        alert('حدث خطأ أثناء الإرسال');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('فشل الاتصال بالخادم');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        placeholder="الاسم"
+        required
+      />
+      
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        placeholder="البريد الإلكتروني"
+        required
+      />
+      
+      <input
+        type="text"
+        name="subject"
+        value={formData.subject}
+        onChange={handleChange}
+        placeholder="الموضوع"
+        required
+      />
+      
+      <textarea
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        placeholder="الرسالة"
+        required
+      ></textarea>
+      
+      <button type="submit">إرسال</button>
+    </form>
+  );
+};
+
+export default ContactForm;
+
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`الخادم يعمل على المنفذ ${PORT}`));
     // Set current year in footer
     const yearElement = document.querySelector('.footer-bottom p');
     if (yearElement) {
